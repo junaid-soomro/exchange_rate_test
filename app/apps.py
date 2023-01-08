@@ -2,12 +2,8 @@ from django.apps import AppConfig
 from app.models import ExchangeRates
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.executors.pool import ThreadPoolExecutor
-from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
-
 from exchange_rates_job import scrape_exchange_rates
 from pytz import utc
-import sys
 
 
 class AppConfig(AppConfig):
@@ -21,9 +17,10 @@ class AppConfig(AppConfig):
 
         print('setting up scheduler to scrape exchange rates and store them to the databse')
 
+        scrape_exchange_rates()  # run once every boot time then get scheduled
         scheduler = BackgroundScheduler(timezone=utc)
-        scheduler.add_job(scrape_exchange_rates, 'interval',
-                          hours=24)
+        scheduler.add_job(scrape_exchange_rates, 'cron',
+                          day_of_week='mon-fri', hour=1, minute=5)  # scheduled to run Mon-Fri at 1:05am
         scheduler.start()
 
         # uncomment below to run once or locally

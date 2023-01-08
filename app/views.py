@@ -34,16 +34,17 @@ def get_euro_exchange_rates(request):
         exchange_rate_delta = {
             "currency": to_currency,
             "rate": exchange_rate_today.rate, "date": str(exchange_rate_today.date),
-            "previous rate": None, "previous date": None
+            "rateDifference": None
         }
 
         if is_true(includePreviousDayComparison):
             try:
                 exchange_rate_yesterday = ExchangeRates.get(
                     to_currency, day_number - 1)
-                exchange_rate_delta["previous rate"] = exchange_rate_yesterday.rate
-                exchange_rate_delta["previous date"] = str(
-                    exchange_rate_yesterday.date)
+
+                previous_day_rate_diff = abs(
+                    exchange_rate_yesterday.rate - exchange_rate_today.rate)
+                exchange_rate_delta["rateDifference"] = previous_day_rate_diff
 
             except:
                 # log to server
@@ -54,5 +55,5 @@ def get_euro_exchange_rates(request):
     except Exception as e:
         message = str(e) if str(e) != 'None' else 'something went wrong'
         if isinstance(e, ExchangeRates.DoesNotExist):
-            message = "not exist! no rate exchange record found against this currency"
+            message = "not exist! no rate exchange record found for today against the provided currency"
         return HttpResponse(json.dumps({'error': message}), status=400, content_type="application/json")
