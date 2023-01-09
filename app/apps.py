@@ -13,7 +13,7 @@ class AppConfig(AppConfig):
         if not ExchangeRates.exists():
             print('spawning exchange rates table in db...')
             ExchangeRates.create_table(
-                read_capacity_units=30, write_capacity_units=30, wait=True)
+                read_capacity_units=1, write_capacity_units=1, wait=True)
 
         print('setting up scheduler to scrape exchange rates and store them to the databse')
 
