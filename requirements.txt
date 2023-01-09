@@ -20,3 +20,4 @@ sqlparse==0.4.3
 tzdata==2022.7
 tzlocal==4.2
 urllib3==1.26.13
+zappa==0.56.1

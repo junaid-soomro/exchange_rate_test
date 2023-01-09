@@ -91,6 +91,8 @@ Removes the virtual env folder.
 
 This cleans up all of the resources that were created by make deploy command.
 
+## make deploy-update (RUN AFTER MAKE DEPLOY IF MADE ANY CHANGES)
+
 ## run locally
 
 In order to run locally you can execute ./task-env/bin/python3.8 runserver manage.py 0.0.0.0:8001 --noreload
