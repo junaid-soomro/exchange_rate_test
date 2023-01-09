@@ -16,8 +16,8 @@
 
 ### PREREQUISITES:
 
-1. Updated ubuntu operating system version > 18.04
-2. Python version > 3.7 but < 3.10(latest)
+1. Updated ubuntu operating system version >= 18.04
+2. Python version 3.8
 3. AWS credentials configured via aws-cli. (run: aws configure. requires; access key, secret key, region)
 
 ## Endpoints
@@ -37,7 +37,7 @@ Query Params:
 - toCurrency (optional: string) expected values(USD, AUD, SAR...) pass this to get exchange rates of this currency against euro.
 - includePreviousDayComparison (optional: boolean) pass this to include previous day's rate difference as compared to today.
 
-**Respone example 1:**
+**Response example 1:**
 
 ```json
 {
@@ -52,7 +52,7 @@ Query Params:
 }
 ```
 
-**Respone example 2:**
+**Response example 2:**
 
 ```json
 {
@@ -62,3 +62,30 @@ Query Params:
   "rateDifference": "<rate-difference>" //compared to previous day of date parameter.
 }
 ```
+
+## DEPLOYMENT AND SETUP:
+
+Navigate your shell to the project's root directory.
+
+### make setup (DO THIS ONCE)
+
+This will install python3.8, spawn virtual environment named "task-env" and install all required python libraries.
+
+### make deploy
+
+This makes use of zappa and deploys the django app to aws. Make sure you have configured your aws-credentials via running aws configure in the shell.
+
+Resources that will be created are as follows;
+
+- API GATEWAY.
+- LAMBDA FUNCTION.
+- DYNAMODB with 1 rcu and 1 wcu.
+- CLOUDWATCH LOGS.
+
+### make clean
+
+Removes the virtual env folder.
+
+## make undeploy
+
+This cleans up all of the resources that were created by make deploy command.
