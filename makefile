@@ -10,7 +10,18 @@ clean:
 	rm -rf $(environmentName)
 
 undeploy: 
+ifneq (,$(findstring aws_access,$(awsCreds)))
+	$(info -------------------------------------)
+	$(info AWS credentials found! continuing...)
+	$(info -------------------------------------)
+	source ./task-env/bin/activate
 	zappa undeploy
+	deactivate
+else
+	$(info -------------------------------------)
+	$(error please run aws configure and add credentials(access key, secret key))
+	$(info -------------------------------------)
+endif
 
 check-python:
 ifneq (,$(findstring 3.8,$(python3)))
