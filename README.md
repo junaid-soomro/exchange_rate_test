@@ -6,6 +6,7 @@
 - This project requires aws credentials ideally of root user's(reason: no permission problems) in order to provision aws resources automatically.
 - Euro has been considered as the base/from currency for task simplicity's sake and exchanges rates of euro to other currencies are directly scraped from https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html everyday.
 - Project is built using django and makes use of zappa to deploy wsgi layer to lambda.
+- us-east-1 region has been used to spawn all of the resources.
 
 ## TECHNICAL DESCRIPTION:
 
