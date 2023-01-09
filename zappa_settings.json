@@ -1,0 +1,14 @@
+{
+    "production": {
+        "aws_region": "us-east-1",
+        "django_settings": "currency_exchange.settings",
+        "profile_name": "default",
+        "project_name": "currency-exchange",
+        "runtime": "python3.9",
+        "s3_bucket": "exchange-currency-buck001",
+        "environment_variables": {
+            "DYNAMO_DB_HOST": "http://dynamodb.us-east-1.amazonaws.com",
+            "EXCHANGE_RATES_SOURCE_URL":"https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+        }
+    }
+}
