@@ -1,4 +1,4 @@
-python3 = $(shell python3.9 --version)
+python3 = $(shell python3.8 --version)
 virtualenv = $(shell pip freeze | grep virtualenv)
 environmentName = 'task-env'
 awsCreds = $(shell cat ~/.aws/credentials | grep aws_access_key)
